@@ -3,115 +3,499 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Birthday Verse</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>AI & Automation Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Fraunces:wght@600;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fdf6f0;--bg-soft:#fef9f5;--sakura:#f4b4b8;--sakura-deep:#e8909a;--petal:#fcdde2;--rose:#d4878f;--sage-soft:#c8dbc7;--lavender:#d8cfe8;--gold:#e2c585;--ink:#4a3f3a;--text:#5c4f48;--text-soft:#9b8d85;--white:#fffcfa;--border:rgba(244,180,184,0.35);--glow:rgba(244,180,184,0.15)}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Quicksand',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;position:relative}
-.sky-wash{position:fixed;inset:0;background:radial-gradient(ellipse at 25% 15%,rgba(211,228,245,0.5) 0%,transparent 55%),radial-gradient(ellipse at 75% 10%,rgba(216,207,232,0.4) 0%,transparent 50%),radial-gradient(ellipse at 50% 85%,rgba(200,219,199,0.3) 0%,transparent 50%),radial-gradient(ellipse at 15% 70%,rgba(252,221,226,0.3) 0%,transparent 45%),linear-gradient(170deg,#fdf6f0 0%,#fef2ee 40%,#f9f0f5 70%,#f5f0f8 100%);pointer-events:none;z-index:0}
-.petals{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
-.petal{position:absolute;top:-20px;opacity:0;animation:fall linear infinite}
-.petal svg{filter:drop-shadow(0 1px 2px rgba(244,180,184,0.2))}
-@keyframes fall{0%{opacity:0;transform:translateY(-20px) rotate(0deg) translateX(0)}8%{opacity:.7}85%{opacity:.5}100%{opacity:0;transform:translateY(105vh) rotate(360deg) translateX(80px)}}
-.page{position:relative;z-index:2;max-width:520px;margin:0 auto;padding:52px 24px 80px}
-.header{text-align:center;margin-bottom:44px;animation:softAppear 1s ease-out}
-@keyframes softAppear{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
-.header-icon{font-size:28px;margin-bottom:12px;animation:gentleBob 3s ease-in-out infinite}
-@keyframes gentleBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-.header h1{font-family:'Cormorant Infant',serif;font-size:clamp(2.4rem,7vw,3.2rem);font-weight:300;color:var(--ink);line-height:1.15}
-.header h1 em{font-style:italic;font-weight:400;color:var(--sakura-deep)}
-.header-sub{margin-top:12px;font-size:14px;color:var(--text-soft);font-weight:400;line-height:1.6}
-.branch-divider{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:20px;color:var(--sakura);font-size:11px;letter-spacing:4px;opacity:.6}
-.branch-divider::before,.branch-divider::after{content:'';width:32px;height:1px;background:linear-gradient(90deg,transparent,var(--sakura),transparent)}
-.card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:36px 30px 30px;box-shadow:0 2px 8px rgba(244,180,184,0.08),0 12px 40px rgba(244,180,184,0.06);animation:floatUp .8s ease-out .2s both;position:relative;overflow:hidden}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sage-soft),var(--sakura),var(--lavender),rgba(211,228,245,0.7));opacity:.7}
-@keyframes floatUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.field{margin-bottom:24px}
-.field:last-of-type{margin-bottom:28px}
-label{display:block;font-family:'Cormorant Infant',serif;font-size:16px;font-weight:500;color:var(--ink);margin-bottom:8px}
-label .hint{display:block;font-family:'Quicksand',sans-serif;font-size:12px;font-weight:400;color:var(--text-soft);margin-top:3px}
-input[type="text"],textarea{width:100%;background:var(--bg-soft);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;font-family:'Quicksand',sans-serif;font-size:14.5px;font-weight:400;color:var(--text);transition:all .3s ease;outline:none}
-input::placeholder,textarea::placeholder{color:var(--text-soft);opacity:.55;font-weight:300}
-input:focus,textarea:focus{border-color:var(--sakura);background:var(--white);box-shadow:0 0 0 4px var(--glow)}
-textarea{min-height:110px;resize:vertical;line-height:1.7}
-.btn-find{width:100%;padding:15px 24px;background:linear-gradient(135deg,var(--sakura),var(--sakura-deep));border:none;border-radius:14px;font-family:'Quicksand',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px;color:var(--white);cursor:pointer;transition:all .35s ease;position:relative;overflow:hidden}
-.btn-find::before{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,0.15);border-radius:50%;transform:translate(-50%,-50%);transition:width .5s ease,height .5s ease}
-.btn-find:hover::before{width:300px;height:300px}
-.btn-find:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(232,144,154,0.3)}
-.btn-find:active{transform:translateY(0)}
-.result{display:none;margin-top:36px;animation:floatUp .7s ease-out}
-.result.active{display:block}
-.verse-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:40px 32px;position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(244,180,184,0.08),0 16px 48px rgba(244,180,184,0.08)}
-.verse-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sage-soft),var(--sakura),var(--lavender));opacity:.6}
-.verse-card::after{content:'\201C';position:absolute;top:12px;left:20px;font-family:'Cormorant Infant',serif;font-size:80px;color:var(--petal);line-height:1;pointer-events:none}
-.verse-for{font-family:'Quicksand',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--sakura-deep);font-weight:600;margin-bottom:20px;position:relative}
-.verse-text{font-family:'Cormorant Infant',serif;font-size:clamp(1.15rem,2.8vw,1.4rem);line-height:1.95;color:var(--ink);font-weight:400;white-space:pre-line;margin-bottom:24px;position:relative}
-.verse-source{font-size:13px;color:var(--text-soft);font-style:italic;padding-top:18px;border-top:1px solid var(--border);position:relative}
-.verse-source strong{color:var(--rose);font-weight:600;font-style:normal}
-.verse-why{margin-top:14px;font-size:13px;color:var(--text-soft);line-height:1.7;position:relative}
-.result-actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
-.btn-soft{font-family:'Quicksand',sans-serif;font-size:12px;font-weight:600;letter-spacing:.8px;padding:10px 20px;border-radius:10px;border:1.5px solid var(--border);background:var(--white);color:var(--text);cursor:pointer;transition:all .25s ease}
-.btn-soft:hover{border-color:var(--sakura);color:var(--sakura-deep);background:var(--glow)}
-.sparkle{position:absolute;width:4px;height:4px;background:var(--gold);border-radius:50%;opacity:0;animation:twinkle 3s ease-in-out infinite}
-@keyframes twinkle{0%,100%{opacity:0;transform:scale(.5)}50%{opacity:.6;transform:scale(1)}}
-.footer{text-align:center;margin-top:48px;font-size:11px;color:var(--text-soft);opacity:.45}
-@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
-@media(max-width:560px){.page{padding:36px 16px 60px}.card{padding:28px 20px 24px}.verse-card{padding:32px 22px}}
+:root {
+  --bg: #FAFAF9;
+  --surface: #FFFFFF;
+  --surface-alt: #F5F3EF;
+  --text: #1C1917;
+  --text-muted: #78716C;
+  --text-light: #A8A29E;
+  --accent: #B45309;
+  --accent-light: #FEF3C7;
+  --accent-dark: #92400E;
+  --green: #047857;
+  --green-light: #D1FAE5;
+  --blue: #1D4ED8;
+  --blue-light: #DBEAFE;
+  --purple: #6D28D9;
+  --purple-light: #EDE9FE;
+  --border: #E7E5E4;
+  --border-dark: #D6D3D1;
+  --shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,.07), 0 2px 4px -2px rgba(0,0,0,.05);
+  --radius: 10px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+
+.site-header { background: var(--text); color: white; padding: 3.5rem 2rem 3rem; position: relative; overflow: hidden; }
+.site-header::before { content: ''; position: absolute; top: -50%; right: -20%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(180,83,9,.25) 0%, transparent 70%); pointer-events: none; }
+.header-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+.header-label { font-family: 'JetBrains Mono', monospace; font-size: .75rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: .75rem; }
+.header-name { font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 900; line-height: 1.15; margin-bottom: .5rem; }
+.header-title { font-size: 1.1rem; color: rgba(255,255,255,.7); }
+.header-links { margin-top: 1.25rem; display: flex; gap: .75rem; flex-wrap: wrap; }
+.header-links a { font-family: 'JetBrains Mono', monospace; font-size: .78rem; color: var(--accent-light); text-decoration: none; padding: .35rem .75rem; border: 1px solid rgba(255,255,255,.15); border-radius: 6px; transition: all .2s; }
+.header-links a:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.3); }
+
+.nav { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+.nav-inner { max-width: 960px; margin: 0 auto; display: flex; gap: 0; overflow-x: auto; }
+.nav a { font-family: 'JetBrains Mono', monospace; font-size: .78rem; letter-spacing: .03em; text-decoration: none; color: var(--text-muted); padding: .9rem 1.2rem; white-space: nowrap; border-bottom: 2px solid transparent; transition: all .2s; }
+.nav a:hover, .nav a.active { color: var(--text); border-bottom-color: var(--accent); }
+
+.container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.section { display: none; }
+.section.active { display: block; }
+
+.progress-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2.5rem; }
+@media (max-width: 700px) { .progress-grid { grid-template-columns: repeat(2, 1fr); } }
+.progress-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; text-align: center; box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s; }
+.progress-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.progress-card .week-num { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 900; color: var(--accent); line-height: 1; }
+.progress-card .week-label { font-size: .82rem; color: var(--text-muted); margin: .35rem 0 .75rem; }
+.progress-bar-bg { width: 100%; height: 6px; background: var(--surface-alt); border-radius: 3px; overflow: hidden; }
+.progress-bar-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width .5s ease; }
+.progress-pct { font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--text-light); margin-top: .4rem; }
+
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; box-shadow: var(--shadow); }
+.card h3 { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: .35rem; }
+.card p { color: var(--text-muted); font-size: .92rem; }
+
+.checklist { list-style: none; margin: .75rem 0; }
+.checklist li { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; border-bottom: 1px solid var(--surface-alt); font-size: .9rem; }
+.checklist li:last-child { border-bottom: none; }
+.checklist input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 18px; height: 18px; min-width: 18px; border: 2px solid var(--border-dark); border-radius: 4px; margin-top: 2px; cursor: pointer; position: relative; transition: all .15s; }
+.checklist input[type="checkbox"]:checked { background: var(--green); border-color: var(--green); }
+.checklist input[type="checkbox"]:checked::after { content: '\2713'; position: absolute; top: -1px; left: 2px; color: white; font-size: 13px; font-weight: 700; }
+.checklist li.done span { text-decoration: line-through; color: var(--text-light); }
+
+.tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: .68rem; letter-spacing: .03em; padding: .2rem .55rem; border-radius: 4px; margin-right: .35rem; }
+.tag-study { background: var(--blue-light); color: var(--blue); }
+.tag-handson { background: var(--green-light); color: var(--green); }
+.tag-project { background: var(--purple-light); color: var(--purple); }
+.tag-time { background: var(--surface-alt); color: var(--text-muted); }
+
+.project-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; box-shadow: var(--shadow); border-left: 4px solid var(--accent); }
+.project-card h3 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: .25rem; }
+.project-meta { font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--text-light); margin-bottom: .65rem; }
+.project-card p { color: var(--text-muted); font-size: .9rem; margin-bottom: .5rem; }
+.project-card .steps { background: var(--surface-alt); border-radius: 8px; padding: 1rem 1.25rem; margin-top: .75rem; }
+.project-card .steps h4 { font-size: .82rem; font-weight: 700; margin-bottom: .5rem; }
+.project-card .steps ol { margin: 0; padding-left: 1.25rem; font-size: .85rem; color: var(--text-muted); }
+.project-card .steps ol li { padding: .2rem 0; }
+.project-card code { font-family: 'JetBrains Mono', monospace; font-size: .8rem; background: var(--surface-alt); padding: .1rem .4rem; border-radius: 3px; }
+
+.note-template { background: var(--surface-alt); border: 2px dashed var(--border-dark); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; }
+.note-template h4 { font-size: .85rem; color: var(--accent-dark); margin-bottom: .75rem; }
+.note-template pre { font-family: 'JetBrains Mono', monospace; font-size: .78rem; line-height: 1.7; color: var(--text-muted); white-space: pre-wrap; }
+
+.notes-entry { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; box-shadow: var(--shadow); }
+.notes-entry .date { font-family: 'JetBrains Mono', monospace; font-size: .75rem; color: var(--accent); margin-bottom: .5rem; }
+.notes-entry h3 { font-size: 1rem; margin-bottom: .35rem; }
+.notes-entry p { color: var(--text-muted); font-size: .9rem; }
+
+.resource-group { margin-bottom: 2rem; }
+.resource-group h3 { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: .75rem; padding-bottom: .35rem; border-bottom: 2px solid var(--surface-alt); }
+.resource-item { display: flex; justify-content: space-between; align-items: center; padding: .6rem 0; border-bottom: 1px solid var(--surface-alt); gap: 1rem; }
+.resource-item:last-child { border-bottom: none; }
+.resource-item a { color: var(--blue); text-decoration: none; font-size: .9rem; font-weight: 500; }
+.resource-item a:hover { text-decoration: underline; }
+.resource-item .desc { font-size: .78rem; color: var(--text-light); text-align: right; white-space: nowrap; }
+
+.section-header { margin-bottom: 2rem; }
+.section-header h2 { font-family: 'Fraunces', serif; font-size: 1.75rem; font-weight: 900; margin-bottom: .35rem; }
+.section-header p { color: var(--text-muted); font-size: .95rem; }
+
+.week-section { margin-bottom: 2.5rem; }
+.week-title { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: .25rem; }
+.week-subtitle { color: var(--text-muted); font-size: .88rem; margin-bottom: 1rem; }
+
+.site-footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: .82rem; color: var(--text-light); }
+.site-footer a { color: var(--accent); }
+
+.setup-guide { background: linear-gradient(135deg, var(--accent-light) 0%, #FEE2E2 100%); border: 1px solid var(--accent); border-radius: var(--radius); padding: 1.75rem; margin-bottom: 2rem; }
+.setup-guide h3 { font-family: 'Fraunces', serif; font-size: 1.1rem; color: var(--accent-dark); margin-bottom: .75rem; }
+.setup-guide ol { padding-left: 1.25rem; font-size: .88rem; color: var(--accent-dark); }
+.setup-guide ol li { padding: .3rem 0; }
+.setup-guide code { font-family: 'JetBrains Mono', monospace; font-size: .82rem; background: rgba(255,255,255,.6); padding: .15rem .4rem; border-radius: 3px; }
 </style>
 </head>
 <body>
-<div class="sky-wash"></div>
-<div class="petals" id="petals"></div>
-<div class="page">
-  <header class="header">
-    <div class="header-icon">&#127800;</div>
-    <h1>Birthday <em>Verse</em></h1>
-    <p class="header-sub">Tell us about your favourite person &mdash; we&rsquo;ll find a poem that feels like them.</p>
-    <div class="branch-divider">&#10043;</div>
-  </header>
-  <div class="card" id="formCard">
-    <div class="field">
-      <label>Their name<span class="hint">The birthday star</span></label>
-      <input type="text" id="nameInput" placeholder="e.g. Sofia" autocomplete="off">
-    </div>
-    <div class="field">
-      <label>Describe your favourite person<span class="hint">What makes them special? What do you love about them?</span></label>
-      <textarea id="personalityInput" placeholder="e.g. She lights up every room, loves rainy afternoons with tea and a good book, always knows the right thing to say, laughs at her own jokes..."></textarea>
-    </div>
-    <button class="btn-find" onclick="handleGenerate()">&#10024; Find their verse</button>
-  </div>
-  <div class="result" id="result">
-    <div class="verse-card" id="verseCard">
-      <div class="verse-for" id="verseFor"></div>
-      <div class="verse-text" id="verseText"></div>
-      <div class="verse-source" id="verseSource"></div>
-      <div class="verse-why" id="verseWhy"></div>
-    </div>
-    <div class="result-actions">
-      <button class="btn-soft" onclick="copyVerse()">Copy</button>
-      <button class="btn-soft" onclick="tryAnother()">Try another</button>
-      <button class="btn-soft" onclick="startOver()">Start over</button>
-    </div>
-  </div>
-  <footer class="footer">crafted with poetry &amp; petals</footer>
-</div>
-<script>
-(function(){var c=document.getElementById('petals');var cols=['#f4b4b8','#fcdde2','#f5d6d0','#f0c4cb','#e8b4bc'];for(var i=0;i<18;i++){var p=document.createElement('div');p.className='petal';p.style.left=(Math.random()*100)+'%';p.style.animationDuration=(8+Math.random()*10)+'s';p.style.animationDelay=(Math.random()*12)+'s';var sz=10+Math.random()*10,cl=cols[Math.floor(Math.random()*cols.length)],rot=Math.random()*360;p.innerHTML='<svg width="'+sz+'" height="'+sz+'" viewBox="0 0 20 20" style="transform:rotate('+rot+'deg)"><ellipse cx="10" cy="8" rx="5" ry="8" fill="'+cl+'" opacity="0.7"/><ellipse cx="8" cy="10" rx="4" ry="6" fill="'+cl+'" opacity="0.5" transform="rotate(-30 10 10)"/></svg>';c.appendChild(p);}})();
-function addSparkles(el){for(var i=0;i<5;i++){var s=document.createElement('div');s.className='sparkle';s.style.top=(10+Math.random()*80)+'%';s.style.left=(5+Math.random()*90)+'%';s.style.animationDelay=(Math.random()*3)+'s';s.style.width=s.style.height=(2+Math.random()*3)+'px';el.appendChild(s);}}
-var poems=[{"v": "Shall I compare thee to a summer’s day?\nThou art more lovely and more temperate.\nRough winds do shake the darling buds of May,\nAnd summer’s lease hath all too short a date.", "p": "William Shakespeare", "t": "Sonnet 18", "k": ["beautiful", "lovely", "warm", "gentle", "radiant", "graceful", "elegant", "bright", "sunshine", "summer", "stunning", "charming", "gorgeous", "pretty"], "n": "Shakespeare wrote these lines to immortalise someone whose warmth outshines even summer — just like {name}."}, {"v": "Love is not love\nWhich alters when it alteration finds,\nOr bends with the remover to remove.\nO no, it is an ever-fixed mark\nThat looks on tempests and is never shaken.", "p": "William Shakespeare", "t": "Sonnet 116", "k": ["steady", "constant", "loyal", "faithful", "unwavering", "reliable", "dependable", "rock", "anchor", "devoted", "committed", "true", "trustworthy", "solid"], "n": "Shakespeare described a love that never wavers — the same steady spirit that defines {name}."}, {"v": "I do not love you as if you were salt-rose, or topaz,\nor the arrow of carnations the fire shoots off.\nI love you as certain dark things are to be loved,\nin secret, between the shadow and the soul.", "p": "Pablo Neruda", "t": "Sonnet XVII", "k": ["deep", "soulful", "mysterious", "quiet", "thoughtful", "introspective", "intense", "passionate", "profound", "complex", "sensitive", "wise", "reflective"], "n": "Neruda’s words mirror the quiet intensity {name} carries — someone whose presence lingers long after they leave."}, {"v": "I want to do with you what spring does with the cherry trees.", "p": "Pablo Neruda", "t": "Every Day You Play", "k": ["joyful", "playful", "alive", "vibrant", "spontaneous", "free", "fun", "adventurous", "lively", "spirited", "energetic", "cheerful", "happy", "wild", "spring", "blossoming"], "n": "One line is all Neruda needed to capture something bursting with life — the same energy {name} brings into every room."}, {"v": "How do I love thee? Let me count the ways.\nI love thee to the depth and breadth and height\nMy soul can reach, when feeling out of sight\nFor the ends of being and ideal grace.", "p": "Elizabeth Barrett Browning", "t": "Sonnet 43", "k": ["devoted", "loving", "deep", "soulful", "romantic", "passionate", "faithful", "adoring", "endless", "boundless", "infinite", "wholehearted", "complete"], "n": "Browning counted the infinite ways of love — and anyone who knows {name} could write their own endless list."}, {"v": "If thou must love me, let it be for nought\nExcept for love’s sake only.", "p": "Elizabeth Barrett Browning", "t": "Sonnet XIV", "k": ["authentic", "genuine", "real", "true", "sincere", "honest", "pure", "unconditional", "accepting", "soul", "essence", "inner beauty", "depth"], "n": "Browning asked to be loved for something eternal — and {name} is someone loved for who they truly are."}, {"v": "If I can stop one heart from breaking,\nI shall not live in vain;\nIf I can ease one life the aching,\nOr cool one pain,\nOr help one fainting robin\nUnto his nest again,\nI shall not live in vain.", "p": "Emily Dickinson", "t": "If I Can Stop One Heart from Breaking", "k": ["kind", "caring", "compassionate", "generous", "selfless", "helper", "nurturing", "empathetic", "healer", "giving", "tender", "supportive", "loving"], "n": "Dickinson celebrated the quiet heroism of kindness — the very thing that defines {name}."}, {"v": "To see a World in a Grain of Sand\nAnd a Heaven in a Wild Flower,\nHold Infinity in the palm of your hand\nAnd Eternity in an hour.", "p": "William Blake", "t": "Auguries of Innocence", "k": ["wonder", "curious", "imaginative", "dreamer", "creative", "magical", "whimsical", "childlike", "open", "spiritual", "visionary", "artistic", "mindful", "observant"], "n": "Blake saw magic in the smallest things — and so does {name}."}, {"v": "If you are seeking, seek us with joy\nFor we live in the kingdom of joy.\nDo not give your heart to anything else\nBut to the love of those who are clear joy.\nFor there are hopes: they are real, they exist —\nI tell you: suns exist.", "p": "Rumi", "t": "Seek Us With Joy", "k": ["joyful", "hopeful", "optimistic", "radiant", "sunny", "cheerful", "positive", "uplifting", "encouraging", "light", "warm", "bright", "happy", "inspiring"], "n": "Rumi reminds us that joy is a home — and {name} has always lived there and invited everyone in."}, {"v": "When you do things from your soul,\nyou feel a river moving in you, a joy.", "p": "Rumi", "t": "When You Do Things from Your Soul", "k": ["passionate", "driven", "purposeful", "soulful", "creative", "authentic", "inspired", "flowing", "alive", "artist", "maker", "doer", "builder"], "n": "Rumi knew true joy comes from living with soul — and {name} does everything with quiet, radiant purpose."}, {"v": "Love is the bridge between you and everything.", "p": "Rumi", "t": "Love is the Bridge", "k": ["connector", "friend", "social", "community", "bridge", "together", "unity", "people", "warmth", "open", "welcoming", "inclusive", "hospitable"], "n": "Rumi’s words feel written for {name} — someone who is the bridge between hearts."}, {"v": "Your task is not to seek for love,\nbut merely to seek and find all the barriers\nwithin yourself that you have built against it.", "p": "Rumi", "t": "Your Task", "k": ["growth", "self-aware", "introspective", "evolving", "healing", "mindful", "meditation", "reflection", "journey", "transformation", "becoming"], "n": "Rumi spoke of the courage to look inward — and {name} has always had the bravery to grow and let love in."}, {"v": "This is how I would die\ninto the love I have for you:\nas pieces of cloud\ndissolve in sunlight.", "p": "Rumi", "t": "This Is How I Would Die", "k": ["devotion", "surrender", "tenderness", "gentle", "soft", "melting", "warmth", "light", "letting go", "peace", "trust", "faith"], "n": "Rumi described love as dissolving into light — the effortless warmth {name} radiates."}, {"v": "You are my wine, my joy,\nMy garden, my springtime,\nMy slumber, my repose,\nWithout you, I can’t cope.", "p": "Rumi", "t": "Love: The Joy That Wounds", "k": ["essential", "irreplaceable", "needed", "cherished", "treasured", "precious", "indispensable", "everything", "garden", "springtime", "comfort", "home"], "n": "Rumi captured needing someone the way earth needs spring — {name} is that person for so many."}, {"v": "Lose yourself,\nLose yourself in this love.\nWhen you lose yourself in this love,\nyou will find everything.", "p": "Rumi", "t": "Lose Yourself", "k": ["surrender", "abandon", "letting go", "freedom", "love", "transcendence", "liberation", "release", "trust", "falling", "leap", "embrace"], "n": "Rumi invites us to dissolve into love — and {name} makes that leap feel safe."}, {"v": "i carry your heart with me(i carry it in\nmy heart)i am never without it(anywhere\ni go you go,my dear;and whatever is done\nby only me is your doing,my darling)", "p": "E.E. Cummings", "t": "i carry your heart with me", "k": ["loving", "devoted", "loyal", "faithful", "romantic", "affectionate", "heart", "connection", "closeness", "partner", "beloved", "sweetheart", "warmhearted"], "n": "Cummings wrote about love that lives inside you permanently — the way {name} stays in every heart."}, {"v": "You do not have to be good.\nYou do not have to walk on your knees\nfor a hundred miles through the desert repenting.\nYou only have to let the soft animal of your body\nlove what it loves.", "p": "Mary Oliver", "t": "Wild Geese", "k": ["free", "authentic", "natural", "wild", "earthy", "honest", "real", "grounded", "unconventional", "independent", "free-spirited", "accepting", "peaceful", "calm"], "n": "Oliver gave the world permission to simply be — and {name} embodies that rare freedom."}, {"v": "Keep some room in your heart for the unimaginable.", "p": "Mary Oliver", "t": "Evidence", "k": ["hopeful", "optimistic", "open-minded", "possibility", "faith", "trust", "believing", "surprise", "unexpected", "open", "receptive", "welcoming"], "n": "Oliver’s gentle reminder is perfect for {name} — someone whose heart always has room for one more surprise."}, {"v": "Let us be grateful to people who make us happy;\nthey are the charming gardeners\nwho make our souls blossom.", "p": "Marcel Proust", "t": "In Search of Lost Time", "k": ["happy", "cheerful", "sunny", "uplifting", "positive", "light", "bright", "funny", "joyful", "delightful", "infectious", "bubbly", "warm", "friend", "grateful"], "n": "Proust knew the rarest gift is making others bloom — exactly what {name} does."}, {"v": "Two roads diverged in a wood, and I—\nI took the one less traveled by,\nAnd that has made all the difference.", "p": "Robert Frost", "t": "The Road Not Taken", "k": ["unique", "individual", "different", "original", "independent", "unconventional", "explorer", "curious", "bold", "journey", "wanderer", "maverick"], "n": "Frost celebrated choosing your own path — and {name} has never followed the crowd."}, {"v": "I have spread my dreams under your feet;\nTread softly because you tread on my dreams.", "p": "W.B. Yeats", "t": "Aedh Wishes for the Cloths of Heaven", "k": ["dreamer", "vulnerable", "tender", "poetic", "romantic", "delicate", "soft", "trusting", "hopeful", "idealist", "gentle", "dream", "wishing", "ethereal"], "n": "Yeats laid his dreams bare with tenderness — the same gentle courage {name} shows."}, {"v": "The world is full of magic things,\npatiently waiting for our senses to grow sharper.", "p": "W.B. Yeats", "t": "attributed", "k": ["magic", "wonder", "curious", "perceptive", "awakening", "aware", "attentive", "noticing", "patient", "discovering", "enchanted", "fascinated"], "n": "Yeats reminds us magic is always there — and {name}’s senses have always been beautifully sharp."}, {"v": "There is a crack in everything.\nThat’s how the light gets in.", "p": "Leonard Cohen", "t": "Anthem", "k": ["imperfect", "real", "honest", "healing", "light", "hope", "redemption", "acceptance", "human", "flawed", "authentic", "raw", "resilient"], "n": "Cohen found beauty in the broken places — and {name} lets light through every crack."}, {"v": "The most beautiful things in the world cannot be seen or even touched.\nThey must be felt with the heart.", "p": "Antoine de Saint-Exupéry", "t": "The Little Prince", "k": ["heart", "feeling", "emotional", "intuitive", "sensitive", "empathetic", "perceptive", "romantic", "tender", "soft", "gentle", "understanding", "insightful"], "n": "Saint-Exupéry understood that the truest things are invisible — and {name} sees with a heart so open it catches everything."}, {"v": "May your coming year be filled with magic\nand dreams and good madness.\nI hope you read some fine books and kiss someone\nwho thinks you’re wonderful.", "p": "Neil Gaiman", "t": "A New Year’s Wish", "k": ["magic", "dream", "dreamer", "whimsical", "reader", "bookworm", "literary", "romantic", "wonderful", "enchanting", "imaginative", "storyteller", "writer"], "n": "Gaiman’s wish for good madness is the perfect blessing for {name}."}, {"v": "My heart is like a singing bird\nWhose nest is in a water’d shoot;\nMy heart is like an apple-tree\nWhose boughs are bent with thickset fruit.", "p": "Christina Rossetti", "t": "A Birthday", "k": ["birthday", "celebrate", "celebration", "festive", "abundant", "full", "rich", "flourishing", "blooming", "fruitful", "singing", "musical", "creative", "expressive"], "n": "Rossetti wrote about a heart so full it overflows — that fullness is what everyone feels around {name}."}, {"v": "Happiness, not in another place but this place,\nnot for another hour, but this hour.", "p": "Walt Whitman", "t": "Song of Myself", "k": ["present", "mindful", "content", "grateful", "grounded", "balanced", "zen", "calm", "satisfied", "fulfilled", "serene", "relaxed"], "n": "Whitman celebrated being right here, right now — and {name} makes wherever they are feel like the right place."}, {"v": "What lies behind us and what lies before us\nare tiny matters compared to\nwhat lies within us.", "p": "Ralph Waldo Emerson", "t": "Self-Reliance", "k": ["inner strength", "character", "integrity", "values", "depth", "substance", "principled", "true", "authentic", "genuine", "real", "soul", "spirit"], "n": "Emerson knew what’s inside matters most — and what lies within {name} is extraordinary."}, {"v": "And the day came when the risk to remain tight in a bud\nwas more painful than the risk it took to blossom.", "p": "Anaïs Nin", "t": "Risk", "k": ["brave", "growth", "blossoming", "vulnerable", "courageous", "evolving", "changing", "transformation", "beginning", "fresh", "renewal", "bloom"], "n": "Nin captured the moment someone chooses to bloom — and {name} has blossomed into someone remarkable."}, {"v": "Out of the night that covers me,\nBlack as the pit from pole to pole,\nI thank whatever gods may be\nFor my unconquerable soul.", "p": "William Ernest Henley", "t": "Invictus", "k": ["strong", "resilient", "fighter", "survivor", "tough", "unbreakable", "determined", "persistent", "warrior", "enduring", "steadfast", "powerful", "unstoppable"], "n": "Henley wrote these words unbowed — they belong to {name}, whose strength is extraordinary."}, {"v": "Come to the edge.\nWe might fall.\nCome to the edge.\nIt’s too high!\nCome to the edge!\nAnd they came,\nand he pushed,\nand they flew.", "p": "Christopher Logue", "t": "Come to the Edge", "k": ["brave", "courageous", "bold", "fearless", "daring", "risk-taker", "leader", "trailblazer", "pioneer", "determined", "fierce", "confident", "adventurous"], "n": "This verse is for the ones who leap — and {name} always finds their wings."}, {"v": "I am not afraid of storms,\nfor I am learning how to sail my ship.", "p": "Louisa May Alcott", "t": "Little Women", "k": ["learning", "growing", "student", "determined", "persevering", "capable", "resourceful", "adaptive", "clever", "smart", "resilient", "steady", "practical"], "n": "{name} doesn’t just weather storms — they learn to dance in the rain."}, {"v": "For whatever we lose (like a you or a me),\nIt’s always our self we find in the sea.", "p": "E.E. Cummings", "t": "maggie and milly and molly and may", "k": ["ocean", "sea", "water", "self-discovery", "searching", "finding", "journey", "explorer", "traveller", "wanderlust", "beach", "waves", "depth"], "n": "Cummings knew the sea gives back what the world takes — and {name} helps people find themselves again."}, {"v": "And think not you can direct the course of love,\nfor love, if it finds you worthy, directs your course.", "p": "Kahlil Gibran", "t": "The Prophet", "k": ["wise", "philosophical", "thinker", "deep", "spiritual", "old soul", "sage", "knowing", "understanding", "accepting", "flow", "surrender", "trust"], "n": "Gibran wrote about letting love lead — and {name} has the wisdom to trust the current."}, {"v": "Your children are not your children.\nThey are the sons and daughters of Life’s longing for itself.\nThey come through you but not from you.", "p": "Kahlil Gibran", "t": "On Children", "k": ["parent", "mother", "father", "family", "children", "nurturing", "letting go", "freedom", "life", "parenting", "guardian", "protector"], "n": "Gibran honours the most generous love — the kind {name} gives: holding close while letting free."}, {"v": "If ever two were one, then surely we.\nIf ever man were lov’d by wife, then thee.", "p": "Anne Bradstreet", "t": "To My Dear and Loving Husband", "k": ["marriage", "spouse", "husband", "wife", "partner", "soulmate", "devotion", "union", "together", "partnership", "bond", "commitment", "vow"], "n": "Bradstreet’s declaration still feels alive — the wholehearted devotion {name} inspires."}, {"v": "O my Luve is like a red, red rose\nThat’s newly sprung in June;\nO my Luve is like the melody\nThat’s sweetly played in tune.", "p": "Robert Burns", "t": "A Red, Red Rose", "k": ["romantic", "passionate", "classic", "timeless", "rose", "flower", "melody", "music", "sweet", "beautiful", "love", "beloved", "devotion", "adoration"], "n": "Burns gave the world one of its most tender declarations — and {name} deserves every word."}, {"v": "A thing of beauty is a joy forever:\nIts loveliness increases; it will never\nPass into nothingness.", "p": "John Keats", "t": "Endymion", "k": ["beautiful", "timeless", "eternal", "lasting", "enduring", "ageless", "classic", "grace", "loveliness", "permanence", "art", "beauty", "forever", "joy"], "n": "Keats knew true beauty only grows — and {name} is proof, more radiant with every passing year."}, {"v": "What is life?\nIt is the flash of a firefly in the night.\nIt is the breath of a buffalo in the wintertime.\nIt is the little shadow which runs across the grass\nand loses itself in the sunset.", "p": "Crowfoot", "t": "Last Words", "k": ["nature", "peaceful", "serene", "gentle", "quiet", "still", "contemplative", "mindful", "present", "precious", "simple", "humble", "earth", "grounded", "outdoors"], "n": "These words remind us how precious every moment is — and {name} understands the beauty in life’s quiet wonders."}];
-var usedIndices=[];
-function scorePoem(poem,text){var score=0,lower=text.toLowerCase();for(var i=0;i<poem.k.length;i++){var kw=poem.k[i];if(lower.indexOf(kw)!==-1){score+=10;continue;}var stem=kw.substring(0,Math.min(kw.length,4));if(stem.length>=3&&lower.indexOf(stem)!==-1)score+=4;}var stems=["laugh","joy","kind","gentle","brave","strong","quiet","bright","warm","love","nature","book","read","star","dream","creat","art","music","sing","danc","ocean","sea","travel","adventur","peace","calm","fun","play","free","grow","learn","wise","deep","heart","soul","spirit","magic","hope","beaut","happy","cheer","friend","loyal","honest","wild","tender","light","rain","tea","funny","smart","silly","sweet","cozy","wonder","bloom","garden","home","comfort","famil","mother","father","child","husband","wife","partner","steady","rock","faith"];for(var i=0;i<stems.length;i++){if(lower.indexOf(stems[i])!==-1){for(var j=0;j<poem.k.length;j++){if(poem.k[j].indexOf(stems[i])!==-1){score+=3;break;}}}}return score;}
-function findBestPoem(text){var scored=[];for(var i=0;i<poems.length;i++)scored.push({poem:poems[i],idx:i,score:scorePoem(poems[i],text)});scored.sort(function(a,b){return b.score-a.score;});for(var m=0;m<scored.length;m++){if(usedIndices.indexOf(scored[m].idx)===-1){usedIndices.push(scored[m].idx);if(usedIndices.length>Math.floor(poems.length/2))usedIndices=[scored[m].idx];return scored[m].poem;}}usedIndices=[scored[0].idx];return scored[0].poem;}
-function esc(s){var d=document.createElement("div");d.textContent=s;return d.innerHTML;}
-function handleGenerate(){var name=document.getElementById("nameInput").value.trim();var desc=document.getElementById("personalityInput").value.trim();if(!name){var el=document.getElementById("nameInput");el.style.animation="none";el.offsetHeight;el.style.animation="shake 0.4s ease";el.focus();return;}var match=findBestPoem(name+" "+desc);document.getElementById("verseFor").textContent="For "+name;document.getElementById("verseText").textContent=match.v;document.getElementById("verseSource").innerHTML="\u2014 <strong>"+esc(match.p)+"</strong>, \u201c"+esc(match.t)+"\u201d";document.getElementById("verseWhy").textContent=match.n.replace(/\{name\}/g,name);var vc=document.getElementById("verseCard");var old=vc.querySelectorAll(".sparkle");for(var i=0;i<old.length;i++)old[i].remove();addSparkles(vc);document.getElementById("formCard").style.display="none";var r=document.getElementById("result");r.classList.add("active");r.scrollIntoView({behavior:"smooth",block:"start"});}
-function tryAnother(){handleGenerate();}
-function copyVerse(){var t=document.getElementById("verseFor").textContent+"\n\n"+document.getElementById("verseText").textContent+"\n\n"+document.getElementById("verseSource").textContent;navigator.clipboard.writeText(t).then(function(){var btn=event.target;btn.textContent="Copied!";setTimeout(function(){btn.textContent="Copy";},1800);});}
-function startOver(){usedIndices=[];document.getElementById("result").classList.remove("active");document.getElementById("formCard").style.display="";document.getElementById("nameInput").value="";document.getElementById("personalityInput").value="";window.scrollTo({top:0,behavior:"smooth"});}
 
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-label">Portfolio</div>
+    <div class="header-name">Vithya</div>
+    <div class="header-title">AI &amp; Automation Lead &middot; Atlassian Platform Specialist</div>
+    <div class="header-links">
+      <a href="https://linkedin.com/in/yourprofile">LinkedIn</a>
+      <a href="https://github.com/yourprofile">GitHub</a>
+      <a href="mailto:your@email.com">Contact</a>
+    </div>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="active" data-section="dashboard">Dashboard</a>
+    <a href="#" data-section="projects">Projects</a>
+    <a href="#" data-section="notes">Learning Notes</a>
+    <a href="#" data-section="resources">Resources</a>
+    <a href="#" data-section="about">About</a>
+  </div>
+</nav>
+
+<main class="container">
+
+  <!-- ════ DASHBOARD ════ -->
+  <div id="dashboard" class="section active">
+    <div class="section-header">
+      <h2>4-Week AI Literacy Sprint</h2>
+      <p>March 3 &ndash; 31, 2026 &middot; Tracking progress toward conversational AI fluency</p>
+    </div>
+
+    <div class="progress-grid">
+      <div class="progress-card"><div class="week-num">1</div><div class="week-label">AI Fundamentals</div><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:0%"></div></div><div class="progress-pct">0 / 8 tasks</div></div>
+      <div class="progress-card"><div class="week-num">2</div><div class="week-label">Prompt Engineering</div><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:0%"></div></div><div class="progress-pct">0 / 8 tasks</div></div>
+      <div class="progress-card"><div class="week-num">3</div><div class="week-label">Atlassian AI + Governance</div><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:0%"></div></div><div class="progress-pct">0 / 8 tasks</div></div>
+      <div class="progress-card"><div class="week-num">4</div><div class="week-label">Industry + Portfolio</div><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:0%"></div></div><div class="progress-pct">0 / 8 tasks</div></div>
+    </div>
+
+    <!-- WEEK 1 -->
+    <div class="week-section">
+      <div class="week-title">Week 1: AI Fundamentals</div>
+      <div class="week-subtitle">Understand LLMs, RAG, agents, and how AI connects to enterprise data</div>
+      <div class="card"><h3>Tasks</h3>
+        <ul class="checklist" data-week="1">
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~2hr</span> DeepLearning.AI &ndash; Generative AI for Everyone (Weeks 1-2)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~45m</span> Google &ndash; Introduction to Generative AI</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~30m</span> AWS &ndash; What is RAG? (read + take notes)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~45m</span> Anthropic &ndash; Prompt Engineering Overview</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~30m</span> Anthropic &ndash; Building Effective Agents (first half)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~20m</span> Andrew Ng &ndash; AI Agentic Design Patterns</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-handson">hands-on</span><span class="tag tag-time">~30m</span> Mini-Lab: Ask Claude to explain 5 AI concepts, then rewrite in your own words</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-project">project</span><span class="tag tag-time">~1hr</span> PROJECT: Create your AI Glossary</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- WEEK 2 -->
+    <div class="week-section">
+      <div class="week-title">Week 2: Prompt Engineering</div>
+      <div class="week-subtitle">Master the one skill that works across every AI tool</div>
+      <div class="card"><h3>Tasks</h3>
+        <ul class="checklist" data-week="2">
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~1.5hr</span> Learn Prompting &ndash; Basics section (all chapters)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~1hr</span> Anthropic &ndash; Prompt Engineering Techniques (all subsections)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~30m</span> Anthropic &ndash; Prompt Library (study 10 examples)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~1.5hr</span> DeepLearning.AI &ndash; Prompt Engineering for Developers</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-handson">hands-on</span><span class="tag tag-time">~30m</span> Mini-Lab: Same task, 5 different prompts &ndash; compare outputs and document why</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-handson">hands-on</span><span class="tag tag-time">~30m</span> Mini-Lab: Write a system prompt for a "Project Status Reporter" agent</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-handson">hands-on</span><span class="tag tag-time">~30m</span> Mini-Lab: Use Claude to analyze a real document &ndash; iterate 3+ times</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-project">project</span><span class="tag tag-time">~1.5hr</span> PROJECT: Build a Prompt Library with before/after examples</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- WEEK 3 -->
+    <div class="week-section">
+      <div class="week-title">Week 3: Atlassian AI Ecosystem + Governance</div>
+      <div class="week-subtitle">Become the most knowledgeable person about Atlassian AI in your org</div>
+      <div class="card"><h3>Tasks</h3>
+        <ul class="checklist" data-week="3">
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~2hr</span> Rovo Documentation &ndash; complete read-through</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~1hr</span> Atlassian Intelligence features across all products</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~30m</span> Agent creation, knowledge sources, and evaluation docs</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~45m</span> Atlassian AI Trust Center + Data Privacy + Williams Racing case study</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-handson">hands-on</span><span class="tag tag-time">~30m</span> Mini-Lab: List every AI feature in your instance (enabled? used? opportunity?)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-handson">hands-on</span><span class="tag tag-time">~1hr</span> Mini-Lab: Build a Rovo agent from scratch for a real problem</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-handson">hands-on</span><span class="tag tag-time">~30m</span> Mini-Lab: Test agent with 10 questions, score results, iterate instructions</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-project">project</span><span class="tag tag-time">~1.5hr</span> PROJECT: AI Capabilities Audit + Rovo Agent Case Study</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- WEEK 4 -->
+    <div class="week-section">
+      <div class="week-title">Week 4: Industry Context + Portfolio</div>
+      <div class="week-subtitle">Understand the landscape, build evidence, position yourself</div>
+      <div class="card"><h3>Tasks</h3>
+        <ul class="checklist" data-week="4">
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~45m</span> Claude Code documentation + best practices (understand the agentic coding pilot)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~30m</span> Amazon Bedrock overview + GitHub Copilot features</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~30m</span> McKinsey State of AI report (key findings)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~20m</span> Microsoft Copilot + ServiceNow Now Assist (awareness)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-handson">hands-on</span><span class="tag tag-time">~1hr</span> Mini-Lab: Write a 1-page AI adoption proposal for a fictional team</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-project">project</span><span class="tag tag-time">~1hr</span> PROJECT: AI Concepts Cheat Sheet for organizations</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-project">project</span><span class="tag tag-time">~1hr</span> PROJECT: Agentic AI Comparison document</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-project">project</span><span class="tag tag-time">~1hr</span> PROJECT: Finalize portfolio site &ndash; fill About, push all projects</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ PROJECTS ════ -->
+  <div id="projects" class="section">
+    <div class="section-header">
+      <h2>Projects</h2>
+      <p>Hands-on work that proves AI literacy &middot; Public projects shareable with employers &middot; Private work documented without exposing company data</p>
+    </div>
+
+    <div class="project-card">
+      <h3>&#128275; Project 1: AI Glossary for Non-Technical Professionals</h3>
+      <div class="project-meta">WEEK 1 &middot; PUBLIC &middot; ~1 hour</div>
+      <p>A plain-English reference explaining AI concepts. Demonstrates you can translate technical ideas for business audiences.</p>
+      <div class="steps"><h4>Step-by-step</h4><ol>
+        <li>Open Claude (free at claude.ai). For each concept below, ask Claude to explain it, then rewrite in YOUR words.</li>
+        <li>Concepts: LLM, Generative AI, RAG, Token, Context Window, Hallucination, Agent, Prompt Engineering, Fine-tuning, Embedding</li>
+        <li>For each: add a "Why it matters at work" sentence with a concrete example</li>
+        <li>Add a "How these connect" section: LLM is the brain, RAG gives it company memory, Agent lets it take actions</li>
+        <li>Add real-world examples: Williams Racing (Rovo agents for F1 operations), HarperCollins (4x reduction in manual work)</li>
+        <li>Save as <code>projects/01-ai-glossary.md</code> in your GitHub repo</li>
+      </ol></div>
+    </div>
+
+    <div class="project-card">
+      <h3>&#128275; Project 2: Prompt Engineering Library</h3>
+      <div class="project-meta">WEEK 2 &middot; PUBLIC &middot; ~1.5 hours</div>
+      <p>A documented collection of prompt patterns with before/after examples showing how iteration improves output.</p>
+      <div class="steps"><h4>Step-by-step</h4><ol>
+        <li>Pick 5 tasks: summarize a document, find stale work items, write a status update, compare options, explain a process</li>
+        <li>Write a "naive prompt" for each (how most people would ask). Run it through Claude. Save the output.</li>
+        <li>Apply techniques: add role, structure, constraints, examples. Run improved prompt. Save output.</li>
+        <li>Document: what you changed, why the output improved, which technique had the biggest impact</li>
+        <li>Create a Prompt Pattern Cheat Sheet: Role Assignment, Structured Output, Few-Shot, Chain of Thought, Constraints</li>
+        <li>Remove any company-specific data. Use generic examples only.</li>
+        <li>Save as <code>projects/02-prompt-library.md</code></li>
+      </ol></div>
+    </div>
+
+    <div class="project-card">
+      <h3>&#128274; Project 3: Rovo Agent Build &ndash; Case Study</h3>
+      <div class="project-meta">WEEK 3 &middot; PRIVATE (sanitized summary public) &middot; ~1.5 hours</div>
+      <p>Build a real Rovo agent at work. Write a sanitized case study about the process for your portfolio.</p>
+      <div class="steps"><h4>Step-by-step</h4><ol>
+        <li>Identify one recurring question in your org ("Where's the doc for X?" or "What's the status of Y?")</li>
+        <li>Create a Rovo agent: name, role description, system instructions, knowledge sources (specific spaces/projects)</li>
+        <li>Write 5 conversation starters (pre-written questions users can click)</li>
+        <li>Test with 10 questions. Rate each: Useful / Partially useful / Wrong</li>
+        <li>Iterate instructions based on failures. Test again. Document improvement.</li>
+        <li>Private notes: full config, test results, iteration log, final accuracy</li>
+        <li>Public case study: "I built an AI agent that [does X]. Here's what I learned." No company names or data.</li>
+        <li>Save public version as <code>projects/03-rovo-agent-case-study.md</code></li>
+      </ol></div>
+    </div>
+
+    <div class="project-card">
+      <h3>&#128274; Project 4: AI Capabilities Audit Framework</h3>
+      <div class="project-meta">WEEK 3 &middot; PRIVATE (template public) &middot; ~1.5 hours</div>
+      <p>Audit every AI feature in your Atlassian instance. Publish the reusable template for others.</p>
+      <div class="steps"><h4>Step-by-step</h4><ol>
+        <li>Open Atlassian Intelligence features documentation</li>
+        <li>Create a table: Feature | Product | Available? | Currently Used? | Potential Use Case | Priority</li>
+        <li>Go through every product: Jira, Confluence, JSM, Rovo Search, Rovo Chat, Rovo Agents</li>
+        <li>Check what's enabled in your instance vs what's available in your plan</li>
+        <li>For unused features, write one sentence on how it could help a specific team</li>
+        <li>Highlight top 5 opportunities with a paragraph recommendation each</li>
+        <li>Share the completed audit with your manager (private). Publish the blank template (public).</li>
+        <li>Save template as <code>projects/04-ai-audit-template.md</code></li>
+      </ol></div>
+    </div>
+
+    <div class="project-card">
+      <h3>&#128275; Project 5: AI Concepts Cheat Sheet for Organizations</h3>
+      <div class="project-meta">WEEK 4 &middot; PUBLIC &middot; ~1 hour</div>
+      <p>A one-pager designed for sharing with colleagues. Shows you can communicate AI at the organizational level.</p>
+      <div class="steps"><h4>Step-by-step</h4><ol>
+        <li>Title: "AI at Work &ndash; What Every Team Should Know"</li>
+        <li>Section 1: "What AI can do today" &ndash; 5 capabilities with examples</li>
+        <li>Section 2: "What AI cannot do" &ndash; hallucinations, judgment, data quality dependency</li>
+        <li>Section 3: "How to get started" &ndash; 3 simple actions anyone can take</li>
+        <li>Section 4: "Staying safe" &ndash; data handling, privacy, responsible use</li>
+        <li>Keep to ONE PAGE. No jargon. Write for someone who uses Jira daily but never thinks about AI.</li>
+        <li>Save as <code>projects/05-ai-cheat-sheet.md</code></li>
+      </ol></div>
+    </div>
+
+    <div class="project-card">
+      <h3>&#128275; Project 6: Agentic AI Tool Comparison</h3>
+      <div class="project-meta">WEEK 4 &middot; PUBLIC &middot; ~1 hour</div>
+      <p>Compare major AI tools in the enterprise landscape. Shows employers you understand the competitive context.</p>
+      <div class="steps"><h4>Step-by-step</h4><ol>
+        <li>Cover: Rovo Agents, Claude Code, GitHub Copilot, Microsoft Copilot for M365, Amazon Bedrock</li>
+        <li>For each: What it is (1 sentence), Who it's for, What it does (3 points), Where it fits</li>
+        <li>Add "How they connect" &ndash; e.g., Bedrock runs Claude, Claude Code is for devs, Rovo is for knowledge workers</li>
+        <li>Add "What this means for organizations" &ndash; why you need a multi-tool AI strategy</li>
+        <li>Use only public information. Cite sources.</li>
+        <li>Save as <code>projects/06-agentic-ai-comparison.md</code></li>
+      </ol></div>
+    </div>
+  </div>
+
+  <!-- ════ NOTES ════ -->
+  <div id="notes" class="section">
+    <div class="section-header">
+      <h2>Learning Notes</h2>
+      <p>Daily notes and reflections &middot; Replace these templates with your actual learning</p>
+    </div>
+
+    <div class="note-template">
+      <h4>&#128221; Daily Note Template</h4>
+<pre>## [Date] — Day [X] of Week [Y]
+
+### What I studied today
+- [Resource name] — [section/chapter]
+- Key takeaway: [one sentence]
+
+### What I practiced
+- [What you did hands-on]
+- [What worked / what didn't]
+
+### Concepts I can now explain
+- [Concept]: [your explanation in one sentence]
+
+### Questions I still have
+- [Question]
+
+### Connection to my work
+- [How does today's learning connect to something real?]</pre>
+    </div>
+
+    <div class="note-template">
+      <h4>&#128221; Weekly Reflection Template</h4>
+<pre>## Week [X] Reflection
+
+### Checkpoint questions (can I answer these? Y/N)
+- [ ] [Question 1]
+- [ ] [Question 2]
+
+### Biggest insight this week
+- [What clicked]
+
+### What I'm still unsure about
+- [Topic to revisit]
+
+### What I built or produced
+- [Link to project / deliverable]
+
+### One thing I'll do differently at work on Monday
+- [Concrete action]</pre>
+    </div>
+
+    <div class="notes-entry">
+      <div class="date">March 3, 2026 &mdash; Day 1</div>
+      <h3>Getting Started</h3>
+      <p>Replace this with your actual notes. Each entry you add here becomes part of your learning record. Keep it honest &mdash; "I don't understand X yet" is more valuable than pretending. Push your notes to GitHub regularly so employers can see consistent effort over time.</p>
+    </div>
+  </div>
+
+  <!-- ════ RESOURCES ════ -->
+  <div id="resources" class="section">
+    <div class="section-header">
+      <h2>Resources</h2>
+      <p>Every resource is free &middot; No credit card required</p>
+    </div>
+
+    <div class="resource-group"><h3>AI Fundamentals</h3>
+      <div class="resource-item"><a href="https://www.deeplearning.ai/courses/generative-ai-for-everyone/" target="_blank">DeepLearning.AI &ndash; Generative AI for Everyone</a><span class="desc">~5hr &middot; Andrew Ng</span></div>
+      <div class="resource-item"><a href="https://www.cloudskillsboost.google/course_templates/536" target="_blank">Google &ndash; Intro to Generative AI</a><span class="desc">45 min</span></div>
+      <div class="resource-item"><a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/" target="_blank">AWS &ndash; What is RAG?</a><span class="desc">15 min read</span></div>
+      <div class="resource-item"><a href="https://www.anthropic.com/research/building-effective-agents" target="_blank">Anthropic &ndash; Building Effective Agents</a><span class="desc">30 min read</span></div>
+      <div class="resource-item"><a href="https://www.deeplearning.ai/the-batch/how-agents-can-improve-llm-performance/" target="_blank">Andrew Ng &ndash; AI Agentic Design Patterns</a><span class="desc">15 min read</span></div>
+    </div>
+
+    <div class="resource-group"><h3>Prompt Engineering</h3>
+      <div class="resource-item"><a href="https://learnprompting.org/" target="_blank">Learn Prompting</a><span class="desc">Free interactive course</span></div>
+      <div class="resource-item"><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank">Anthropic &ndash; Prompt Engineering Docs</a><span class="desc">Official guide</span></div>
+      <div class="resource-item"><a href="https://docs.anthropic.com/en/prompt-library/library" target="_blank">Anthropic &ndash; Prompt Library</a><span class="desc">Real examples</span></div>
+      <div class="resource-item"><a href="https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/" target="_blank">DeepLearning.AI &ndash; Prompt Eng. for Developers</a><span class="desc">~1.5hr free</span></div>
+    </div>
+
+    <div class="resource-group"><h3>Atlassian AI Ecosystem</h3>
+      <div class="resource-item"><a href="https://support.atlassian.com/rovo/" target="_blank">Rovo &ndash; Complete Documentation</a><span class="desc">Your home base</span></div>
+      <div class="resource-item"><a href="https://support.atlassian.com/rovo/docs/create-and-edit-agents/" target="_blank">Create and Edit Rovo Agents</a><span class="desc">Agent building</span></div>
+      <div class="resource-item"><a href="https://support.atlassian.com/rovo/docs/atlassian-agents/" target="_blank">Out-of-the-box Rovo Agents</a><span class="desc">Pre-built agents</span></div>
+      <div class="resource-item"><a href="https://support.atlassian.com/organization-administration/docs/understand-atlassian-intelligence-features-in-products/" target="_blank">Atlassian Intelligence Features</a><span class="desc">All products</span></div>
+      <div class="resource-item"><a href="https://www.atlassian.com/trust/atlassian-intelligence" target="_blank">Atlassian AI Trust Center</a><span class="desc">Privacy &amp; security</span></div>
+      <div class="resource-item"><a href="https://www.atlassian.com/software/rovo/use-cases" target="_blank">Rovo Use Cases Library</a><span class="desc">Official prompts</span></div>
+      <div class="resource-item"><a href="https://www.atlassian.com/blog/artificial-intelligence/awr-rovo-use-cases" target="_blank">Williams Racing + Rovo</a><span class="desc">Case study</span></div>
+    </div>
+
+    <div class="resource-group"><h3>Agentic Coding (Pilot Context)</h3>
+      <div class="resource-item"><a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank">Claude Code Documentation</a><span class="desc">What the pilot uses</span></div>
+      <div class="resource-item"><a href="https://docs.anthropic.com/en/docs/claude-code/best-practices" target="_blank">Claude Code Best Practices</a><span class="desc">Skills &amp; context files</span></div>
+      <div class="resource-item"><a href="https://aws.amazon.com/bedrock/" target="_blank">Amazon Bedrock</a><span class="desc">Infrastructure</span></div>
+      <div class="resource-item"><a href="https://github.com/features/copilot" target="_blank">GitHub Copilot</a><span class="desc">Competitor</span></div>
+    </div>
+
+    <div class="resource-group"><h3>Industry Context</h3>
+      <div class="resource-item"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank">McKinsey &ndash; State of AI</a><span class="desc">Annual survey</span></div>
+      <div class="resource-item"><a href="https://community.atlassian.com/forums/Rovo/" target="_blank">Atlassian Community &ndash; Rovo</a><span class="desc">Discussions</span></div>
+    </div>
+  </div>
+
+  <!-- ════ ABOUT ════ -->
+  <div id="about" class="section">
+    <div class="section-header"><h2>About</h2></div>
+    <div class="card"><h3>Who I Am</h3><p>[Write 2-3 sentences. Example: "I'm an Atlassian platform specialist with X years of experience administering Jira, Confluence, and JSM for enterprise teams. I'm building expertise in AI and automation to help organizations work smarter with the tools they already have."]</p></div>
+    <div class="card"><h3>What I'm Building Toward</h3><p>[Example: "Leading AI adoption and automation across enterprise platforms — bridging the gap between engineering AI tools and organizational adoption. I combine deep platform knowledge with practical AI literacy to build solutions that create measurable business impact."]</p></div>
+    <div class="card"><h3>Skills</h3>
+      <p><strong>Platform:</strong> Jira, Confluence, JSM, Rovo, Atlassian Guard, Jira Product Discovery</p>
+      <p><strong>AI &amp; Automation:</strong> Prompt Engineering, Rovo Agent Design, Jira/Confluence Automation, AI Governance, RAG (conceptual), LLM Application Design</p>
+      <p><strong>Business:</strong> Process Optimization, Stakeholder Communication, Change Management, Technical Documentation</p>
+    </div>
+    <div class="card"><h3>Certifications &amp; Learning</h3>
+      <p>[Add as you complete them]</p>
+      <p>&bull; DeepLearning.AI &ndash; Generative AI for Everyone (March 2026)</p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">Built with curiosity &middot; Updated March 2026 &middot; <a href="https://github.com/yourprofile">Source on GitHub</a></footer>
+
+<script>
+document.querySelectorAll('.nav a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelectorAll('.nav a').forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(link.dataset.section).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+const state = {};
+function initCheckboxes() {
+  document.querySelectorAll('.checklist').forEach(list => {
+    const week = list.dataset.week;
+    if (!state[week]) state[week] = {};
+    list.querySelectorAll('input[type="checkbox"]').forEach((cb, i) => {
+      cb.addEventListener('change', () => {
+        cb.closest('li').classList.toggle('done', cb.checked);
+        updateProgress();
+      });
+    });
+  });
+}
+function updateProgress() {
+  document.querySelectorAll('.checklist').forEach((list, idx) => {
+    const total = list.querySelectorAll('input[type="checkbox"]').length;
+    const checked = list.querySelectorAll('input[type="checkbox"]:checked').length;
+    const pct = total ? Math.round((checked / total) * 100) : 0;
+    const cards = document.querySelectorAll('.progress-card');
+    if (cards[idx]) {
+      cards[idx].querySelector('.progress-bar-fill').style.width = pct + '%';
+      cards[idx].querySelector('.progress-pct').textContent = checked + ' / ' + total + ' tasks';
+    }
+  });
+}
+initCheckboxes();
+updateProgress();
 </script>
 </body>
 </html>
