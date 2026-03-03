@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI & Automation Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Fraunces:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAF9;
+  --surface: #FFFFFF;
+  --surface-alt: #F5F3EF;
+  --text: #1C1917;
+  --text-muted: #78716C;
+  --text-light: #A8A29E;
+  --accent: #B45309;
+  --accent-light: #FEF3C7;
+  --accent-dark: #92400E;
+  --green: #047857;
+  --green-light: #D1FAE5;
+  --blue: #1D4ED8;
+  --blue-light: #DBEAFE;
+  --purple: #6D28D9;
+  --purple-light: #EDE9FE;
+  --border: #E7E5E4;
+  --border-dark: #D6D3D1;
+  --shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,.07), 0 2px 4px -2px rgba(0,0,0,.05);
+  --radius: 10px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+
+.site-header { background: var(--text); color: white; padding: 3.5rem 2rem 3rem; position: relative; overflow: hidden; }
+.site-header::before { content: ''; position: absolute; top: -50%; right: -20%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(180,83,9,.25) 0%, transparent 70%); pointer-events: none; }
+.header-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+.header-label { font-family: 'JetBrains Mono', monospace; font-size: .75rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: .75rem; }
+.header-name { font-family: 'Fraunces', serif; font-size: 2.5rem; font-weight: 900; line-height: 1.15; margin-bottom: .5rem; }
+.header-title { font-size: 1.1rem; color: rgba(255,255,255,.7); }
+.header-links { margin-top: 1.25rem; display: flex; gap: .75rem; flex-wrap: wrap; }
+.header-links a { font-family: 'JetBrains Mono', monospace; font-size: .78rem; color: var(--accent-light); text-decoration: none; padding: .35rem .75rem; border: 1px solid rgba(255,255,255,.15); border-radius: 6px; transition: all .2s; }
+.header-links a:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.3); }
+
+.nav { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+.nav-inner { max-width: 960px; margin: 0 auto; display: flex; gap: 0; overflow-x: auto; }
+.nav a { font-family: 'JetBrains Mono', monospace; font-size: .78rem; letter-spacing: .03em; text-decoration: none; color: var(--text-muted); padding: .9rem 1.2rem; white-space: nowrap; border-bottom: 2px solid transparent; transition: all .2s; }
+.nav a:hover, .nav a.active { color: var(--text); border-bottom-color: var(--accent); }
+
+.container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.section { display: none; }
+.section.active { display: block; }
+
+.progress-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2.5rem; }
+@media (max-width: 700px) { .progress-grid { grid-template-columns: repeat(2, 1fr); } }
+.progress-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; text-align: center; box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s; }
+.progress-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.progress-card .week-num { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 900; color: var(--accent); line-height: 1; }
+.progress-card .week-label { font-size: .82rem; color: var(--text-muted); margin: .35rem 0 .75rem; }
+.progress-bar-bg { width: 100%; height: 6px; background: var(--surface-alt); border-radius: 3px; overflow: hidden; }
+.progress-bar-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width .5s ease; }
+.progress-pct { font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--text-light); margin-top: .4rem; }
+
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; box-shadow: var(--shadow); }
+.card h3 { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: .35rem; }
+.card p { color: var(--text-muted); font-size: .92rem; }
+
+.checklist { list-style: none; margin: .75rem 0; }
+.checklist li { display: flex; align-items: flex-start; gap: .6rem; padding: .5rem 0; border-bottom: 1px solid var(--surface-alt); font-size: .9rem; }
+.checklist li:last-child { border-bottom: none; }
+.checklist input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 18px; height: 18px; min-width: 18px; border: 2px solid var(--border-dark); border-radius: 4px; margin-top: 2px; cursor: pointer; position: relative; transition: all .15s; }
+.checklist input[type="checkbox"]:checked { background: var(--green); border-color: var(--green); }
+.checklist input[type="checkbox"]:checked::after { content: '\2713'; position: absolute; top: -1px; left: 2px; color: white; font-size: 13px; font-weight: 700; }
+.checklist li.done span { text-decoration: line-through; color: var(--text-light); }
+
+.tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: .68rem; letter-spacing: .03em; padding: .2rem .55rem; border-radius: 4px; margin-right: .35rem; }
+.tag-study { background: var(--blue-light); color: var(--blue); }
+.tag-handson { background: var(--green-light); color: var(--green); }
+.tag-project { background: var(--purple-light); color: var(--purple); }
+.tag-time { background: var(--surface-alt); color: var(--text-muted); }
+
+.project-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; box-shadow: var(--shadow); border-left: 4px solid var(--accent); }
+.project-card h3 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: .25rem; }
+.project-meta { font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--text-light); margin-bottom: .65rem; }
+.project-card p { color: var(--text-muted); font-size: .9rem; margin-bottom: .5rem; }
+.project-card .steps { background: var(--surface-alt); border-radius: 8px; padding: 1rem 1.25rem; margin-top: .75rem; }
+.project-card .steps h4 { font-size: .82rem; font-weight: 700; margin-bottom: .5rem; }
+.project-card .steps ol { margin: 0; padding-left: 1.25rem; font-size: .85rem; color: var(--text-muted); }
+.project-card .steps ol li { padding: .2rem 0; }
+.project-card code { font-family: 'JetBrains Mono', monospace; font-size: .8rem; background: var(--surface-alt); padding: .1rem .4rem; border-radius: 3px; }
+
+.note-template { background: var(--surface-alt); border: 2px dashed var(--border-dark); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; }
+.note-template h4 { font-size: .85rem; color: var(--accent-dark); margin-bottom: .75rem; }
+.note-template pre { font-family: 'JetBrains Mono', monospace; font-size: .78rem; line-height: 1.7; color: var(--text-muted); white-space: pre-wrap; }
+
+.notes-entry { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1rem; box-shadow: var(--shadow); }
+.notes-entry .date { font-family: 'JetBrains Mono', monospace; font-size: .75rem; color: var(--accent); margin-bottom: .5rem; }
+.notes-entry h3 { font-size: 1rem; margin-bottom: .35rem; }
+.notes-entry p { color: var(--text-muted); font-size: .9rem; }
+
+.resource-group { margin-bottom: 2rem; }
+.resource-group h3 { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: .75rem; padding-bottom: .35rem; border-bottom: 2px solid var(--surface-alt); }
+.resource-item { display: flex; justify-content: space-between; align-items: center; padding: .6rem 0; border-bottom: 1px solid var(--surface-alt); gap: 1rem; }
+.resource-item:last-child { border-bottom: none; }
+.resource-item a { color: var(--blue); text-decoration: none; font-size: .9rem; font-weight: 500; }
+.resource-item a:hover { text-decoration: underline; }
+.resource-item .desc { font-size: .78rem; color: var(--text-light); text-align: right; white-space: nowrap; }
+
+.section-header { margin-bottom: 2rem; }
+.section-header h2 { font-family: 'Fraunces', serif; font-size: 1.75rem; font-weight: 900; margin-bottom: .35rem; }
+.section-header p { color: var(--text-muted); font-size: .95rem; }
+
+.week-section { margin-bottom: 2.5rem; }
+.week-title { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: .25rem; }
+.week-subtitle { color: var(--text-muted); font-size: .88rem; margin-bottom: 1rem; }
+
+.site-footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: .82rem; color: var(--text-light); }
+.site-footer a { color: var(--accent); }
+
+.setup-guide { background: linear-gradient(135deg, var(--accent-light) 0%, #FEE2E2 100%); border: 1px solid var(--accent); border-radius: var(--radius); padding: 1.75rem; margin-bottom: 2rem; }
+.setup-guide h3 { font-family: 'Fraunces', serif; font-size: 1.1rem; color: var(--accent-dark); margin-bottom: .75rem; }
+.setup-guide ol { padding-left: 1.25rem; font-size: .88rem; color: var(--accent-dark); }
+.setup-guide ol li { padding: .3rem 0; }
+.setup-guide code { font-family: 'JetBrains Mono', monospace; font-size: .82rem; background: rgba(255,255,255,.6); padding: .15rem .4rem; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-label">Portfolio</div>
+    <div class="header-name">[Your Name]</div>
+    <div class="header-title">AI &amp; Automation Lead &middot; Atlassian Platform Specialist</div>
+    <div class="header-links">
+      <a href="https://linkedin.com/in/yourprofile">LinkedIn</a>
+      <a href="https://github.com/yourprofile">GitHub</a>
+      <a href="mailto:your@email.com">Contact</a>
+    </div>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="active" data-section="dashboard">Dashboard</a>
+    <a href="#" data-section="projects">Projects</a>
+    <a href="#" data-section="notes">Learning Notes</a>
+    <a href="#" data-section="resources">Resources</a>
+    <a href="#" data-section="about">About</a>
+  </div>
+</nav>
+
+<main class="container">
+
+  <!-- ════ DASHBOARD ════ -->
+  <div id="dashboard" class="section active">
+    <div class="section-header">
+      <h2>4-Week AI Literacy Sprint</h2>
+      <p>March 3 &ndash; 31, 2026 &middot; Tracking progress toward conversational AI fluency</p>
+    </div>
+
+    <div class="setup-guide">
+      <h3>How to Deploy This Site on GitHub Pages</h3>
+      <ol>
+        <li>Create a GitHub account at <code>github.com</code> (free)</li>
+        <li>Create a new repository named <code>ai-portfolio</code></li>
+        <li>Upload this file as <code>index.html</code> to the repository</li>
+        <li>Go to Settings &rarr; Pages &rarr; Source: select "main" branch &rarr; Save</li>
+        <li>Your site will be live at <code>https://yourusername.github.io/ai-portfolio/</code></li>
+        <li>Create a <code>projects/</code> folder and add your project markdown files there</li>
+        <li>Update your name, links, and About section, then commit</li>
+        <li>Delete this setup guide from the HTML once you're live!</li>
+      </ol>
+    </div>
+
+    <div class="progress-grid">
+      <div class="progress-card"><div class="week-num">1</div><div class="week-label">AI Fundamentals</div><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:0%"></div></div><div class="progress-pct">0 / 8 tasks</div></div>
+      <div class="progress-card"><div class="week-num">2</div><div class="week-label">Prompt Engineering</div><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:0%"></div></div><div class="progress-pct">0 / 8 tasks</div></div>
+      <div class="progress-card"><div class="week-num">3</div><div class="week-label">Atlassian AI + Governance</div><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:0%"></div></div><div class="progress-pct">0 / 8 tasks</div></div>
+      <div class="progress-card"><div class="week-num">4</div><div class="week-label">Industry + Portfolio</div><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:0%"></div></div><div class="progress-pct">0 / 8 tasks</div></div>
+    </div>
+
+    <!-- WEEK 1 -->
+    <div class="week-section">
+      <div class="week-title">Week 1: AI Fundamentals</div>
+      <div class="week-subtitle">Understand LLMs, RAG, agents, and how AI connects to enterprise data</div>
+      <div class="card"><h3>Tasks</h3>
+        <ul class="checklist" data-week="1">
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~2hr</span> DeepLearning.AI &ndash; Generative AI for Everyone (Weeks 1-2)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~45m</span> Google &ndash; Introduction to Generative AI</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~30m</span> AWS &ndash; What is RAG? (read + take notes)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~45m</span> Anthropic &ndash; Prompt Engineering Overview</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~30m</span> Anthropic &ndash; Building Effective Agents (first half)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~20m</span> Andrew Ng &ndash; AI Agentic Design Patterns</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-handson">hands-on</span><span class="tag tag-time">~30m</span> Mini-Lab: Ask Claude to explain 5 AI concepts, then rewrite in your own words</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-project">project</span><span class="tag tag-time">~1hr</span> PROJECT: Create your AI Glossary</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- WEEK 2 -->
+    <div class="week-section">
+      <div class="week-title">Week 2: Prompt Engineering</div>
+      <div class="week-subtitle">Master the one skill that works across every AI tool</div>
+      <div class="card"><h3>Tasks</h3>
+        <ul class="checklist" data-week="2">
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~1.5hr</span> Learn Prompting &ndash; Basics section (all chapters)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~1hr</span> Anthropic &ndash; Prompt Engineering Techniques (all subsections)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~30m</span> Anthropic &ndash; Prompt Library (study 10 examples)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~1.5hr</span> DeepLearning.AI &ndash; Prompt Engineering for Developers</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-handson">hands-on</span><span class="tag tag-time">~30m</span> Mini-Lab: Same task, 5 different prompts &ndash; compare outputs and document why</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-handson">hands-on</span><span class="tag tag-time">~30m</span> Mini-Lab: Write a system prompt for a "Project Status Reporter" agent</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-handson">hands-on</span><span class="tag tag-time">~30m</span> Mini-Lab: Use Claude to analyze a real document &ndash; iterate 3+ times</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-project">project</span><span class="tag tag-time">~1.5hr</span> PROJECT: Build a Prompt Library with before/after examples</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- WEEK 3 -->
+    <div class="week-section">
+      <div class="week-title">Week 3: Atlassian AI Ecosystem + Governance</div>
+      <div class="week-subtitle">Become the most knowledgeable person about Atlassian AI in your org</div>
+      <div class="card"><h3>Tasks</h3>
+        <ul class="checklist" data-week="3">
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~2hr</span> Rovo Documentation &ndash; complete read-through</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~1hr</span> Atlassian Intelligence features across all products</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~30m</span> Agent creation, knowledge sources, and evaluation docs</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~45m</span> Atlassian AI Trust Center + Data Privacy + Williams Racing case study</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-handson">hands-on</span><span class="tag tag-time">~30m</span> Mini-Lab: List every AI feature in your instance (enabled? used? opportunity?)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-handson">hands-on</span><span class="tag tag-time">~1hr</span> Mini-Lab: Build a Rovo agent from scratch for a real problem</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-handson">hands-on</span><span class="tag tag-time">~30m</span> Mini-Lab: Test agent with 10 questions, score results, iterate instructions</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-project">project</span><span class="tag tag-time">~1.5hr</span> PROJECT: AI Capabilities Audit + Rovo Agent Case Study</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- WEEK 4 -->
+    <div class="week-section">
+      <div class="week-title">Week 4: Industry Context + Portfolio</div>
+      <div class="week-subtitle">Understand the landscape, build evidence, position yourself</div>
+      <div class="card"><h3>Tasks</h3>
+        <ul class="checklist" data-week="4">
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~45m</span> Claude Code documentation + best practices (understand the agentic coding pilot)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~30m</span> Amazon Bedrock overview + GitHub Copilot features</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~30m</span> McKinsey State of AI report (key findings)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-study">study</span><span class="tag tag-time">~20m</span> Microsoft Copilot + ServiceNow Now Assist (awareness)</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-handson">hands-on</span><span class="tag tag-time">~1hr</span> Mini-Lab: Write a 1-page AI adoption proposal for a fictional team</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-project">project</span><span class="tag tag-time">~1hr</span> PROJECT: AI Concepts Cheat Sheet for organizations</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-project">project</span><span class="tag tag-time">~1hr</span> PROJECT: Agentic AI Comparison document</span></li>
+          <li><input type="checkbox"><span><span class="tag tag-project">project</span><span class="tag tag-time">~1hr</span> PROJECT: Finalize portfolio site &ndash; fill About, push all projects</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ PROJECTS ════ -->
+  <div id="projects" class="section">
+    <div class="section-header">
+      <h2>Projects</h2>
+      <p>Hands-on work that proves AI literacy &middot; Public projects shareable with employers &middot; Private work documented without exposing company data</p>
+    </div>
+
+    <div class="project-card">
+      <h3>&#128275; Project 1: AI Glossary for Non-Technical Professionals</h3>
+      <div class="project-meta">WEEK 1 &middot; PUBLIC &middot; ~1 hour</div>
+      <p>A plain-English reference explaining AI concepts. Demonstrates you can translate technical ideas for business audiences.</p>
+      <div class="steps"><h4>Step-by-step</h4><ol>
+        <li>Open Claude (free at claude.ai). For each concept below, ask Claude to explain it, then rewrite in YOUR words.</li>
+        <li>Concepts: LLM, Generative AI, RAG, Token, Context Window, Hallucination, Agent, Prompt Engineering, Fine-tuning, Embedding</li>
+        <li>For each: add a "Why it matters at work" sentence with a concrete example</li>
+        <li>Add a "How these connect" section: LLM is the brain, RAG gives it company memory, Agent lets it take actions</li>
+        <li>Add real-world examples: Williams Racing (Rovo agents for F1 operations), HarperCollins (4x reduction in manual work)</li>
+        <li>Save as <code>projects/01-ai-glossary.md</code> in your GitHub repo</li>
+      </ol></div>
+    </div>
+
+    <div class="project-card">
+      <h3>&#128275; Project 2: Prompt Engineering Library</h3>
+      <div class="project-meta">WEEK 2 &middot; PUBLIC &middot; ~1.5 hours</div>
+      <p>A documented collection of prompt patterns with before/after examples showing how iteration improves output.</p>
+      <div class="steps"><h4>Step-by-step</h4><ol>
+        <li>Pick 5 tasks: summarize a document, find stale work items, write a status update, compare options, explain a process</li>
+        <li>Write a "naive prompt" for each (how most people would ask). Run it through Claude. Save the output.</li>
+        <li>Apply techniques: add role, structure, constraints, examples. Run improved prompt. Save output.</li>
+        <li>Document: what you changed, why the output improved, which technique had the biggest impact</li>
+        <li>Create a Prompt Pattern Cheat Sheet: Role Assignment, Structured Output, Few-Shot, Chain of Thought, Constraints</li>
+        <li>Remove any company-specific data. Use generic examples only.</li>
+        <li>Save as <code>projects/02-prompt-library.md</code></li>
+      </ol></div>
+    </div>
+
+    <div class="project-card">
+      <h3>&#128274; Project 3: Rovo Agent Build &ndash; Case Study</h3>
+      <div class="project-meta">WEEK 3 &middot; PRIVATE (sanitized summary public) &middot; ~1.5 hours</div>
+      <p>Build a real Rovo agent at work. Write a sanitized case study about the process for your portfolio.</p>
+      <div class="steps"><h4>Step-by-step</h4><ol>
+        <li>Identify one recurring question in your org ("Where's the doc for X?" or "What's the status of Y?")</li>
+        <li>Create a Rovo agent: name, role description, system instructions, knowledge sources (specific spaces/projects)</li>
+        <li>Write 5 conversation starters (pre-written questions users can click)</li>
+        <li>Test with 10 questions. Rate each: Useful / Partially useful / Wrong</li>
+        <li>Iterate instructions based on failures. Test again. Document improvement.</li>
+        <li>Private notes: full config, test results, iteration log, final accuracy</li>
+        <li>Public case study: "I built an AI agent that [does X]. Here's what I learned." No company names or data.</li>
+        <li>Save public version as <code>projects/03-rovo-agent-case-study.md</code></li>
+      </ol></div>
+    </div>
+
+    <div class="project-card">
+      <h3>&#128274; Project 4: AI Capabilities Audit Framework</h3>
+      <div class="project-meta">WEEK 3 &middot; PRIVATE (template public) &middot; ~1.5 hours</div>
+      <p>Audit every AI feature in your Atlassian instance. Publish the reusable template for others.</p>
+      <div class="steps"><h4>Step-by-step</h4><ol>
+        <li>Open Atlassian Intelligence features documentation</li>
+        <li>Create a table: Feature | Product | Available? | Currently Used? | Potential Use Case | Priority</li>
+        <li>Go through every product: Jira, Confluence, JSM, Rovo Search, Rovo Chat, Rovo Agents</li>
+        <li>Check what's enabled in your instance vs what's available in your plan</li>
+        <li>For unused features, write one sentence on how it could help a specific team</li>
+        <li>Highlight top 5 opportunities with a paragraph recommendation each</li>
+        <li>Share the completed audit with your manager (private). Publish the blank template (public).</li>
+        <li>Save template as <code>projects/04-ai-audit-template.md</code></li>
+      </ol></div>
+    </div>
+
+    <div class="project-card">
+      <h3>&#128275; Project 5: AI Concepts Cheat Sheet for Organizations</h3>
+      <div class="project-meta">WEEK 4 &middot; PUBLIC &middot; ~1 hour</div>
+      <p>A one-pager designed for sharing with colleagues. Shows you can communicate AI at the organizational level.</p>
+      <div class="steps"><h4>Step-by-step</h4><ol>
+        <li>Title: "AI at Work &ndash; What Every Team Should Know"</li>
+        <li>Section 1: "What AI can do today" &ndash; 5 capabilities with examples</li>
+        <li>Section 2: "What AI cannot do" &ndash; hallucinations, judgment, data quality dependency</li>
+        <li>Section 3: "How to get started" &ndash; 3 simple actions anyone can take</li>
+        <li>Section 4: "Staying safe" &ndash; data handling, privacy, responsible use</li>
+        <li>Keep to ONE PAGE. No jargon. Write for someone who uses Jira daily but never thinks about AI.</li>
+        <li>Save as <code>projects/05-ai-cheat-sheet.md</code></li>
+      </ol></div>
+    </div>
+
+    <div class="project-card">
+      <h3>&#128275; Project 6: Agentic AI Tool Comparison</h3>
+      <div class="project-meta">WEEK 4 &middot; PUBLIC &middot; ~1 hour</div>
+      <p>Compare major AI tools in the enterprise landscape. Shows employers you understand the competitive context.</p>
+      <div class="steps"><h4>Step-by-step</h4><ol>
+        <li>Cover: Rovo Agents, Claude Code, GitHub Copilot, Microsoft Copilot for M365, Amazon Bedrock</li>
+        <li>For each: What it is (1 sentence), Who it's for, What it does (3 points), Where it fits</li>
+        <li>Add "How they connect" &ndash; e.g., Bedrock runs Claude, Claude Code is for devs, Rovo is for knowledge workers</li>
+        <li>Add "What this means for organizations" &ndash; why you need a multi-tool AI strategy</li>
+        <li>Use only public information. Cite sources.</li>
+        <li>Save as <code>projects/06-agentic-ai-comparison.md</code></li>
+      </ol></div>
+    </div>
+  </div>
+
+  <!-- ════ NOTES ════ -->
+  <div id="notes" class="section">
+    <div class="section-header">
+      <h2>Learning Notes</h2>
+      <p>Daily notes and reflections &middot; Replace these templates with your actual learning</p>
+    </div>
+
+    <div class="note-template">
+      <h4>&#128221; Daily Note Template</h4>
+<pre>## [Date] — Day [X] of Week [Y]
+
+### What I studied today
+- [Resource name] — [section/chapter]
+- Key takeaway: [one sentence]
+
+### What I practiced
+- [What you did hands-on]
+- [What worked / what didn't]
+
+### Concepts I can now explain
+- [Concept]: [your explanation in one sentence]
+
+### Questions I still have
+- [Question]
+
+### Connection to my work
+- [How does today's learning connect to something real?]</pre>
+    </div>
+
+    <div class="note-template">
+      <h4>&#128221; Weekly Reflection Template</h4>
+<pre>## Week [X] Reflection
+
+### Checkpoint questions (can I answer these? Y/N)
+- [ ] [Question 1]
+- [ ] [Question 2]
+
+### Biggest insight this week
+- [What clicked]
+
+### What I'm still unsure about
+- [Topic to revisit]
+
+### What I built or produced
+- [Link to project / deliverable]
+
+### One thing I'll do differently at work on Monday
+- [Concrete action]</pre>
+    </div>
+
+    <div class="notes-entry">
+      <div class="date">March 3, 2026 &mdash; Day 1</div>
+      <h3>Getting Started</h3>
+      <p>Replace this with your actual notes. Each entry you add here becomes part of your learning record. Keep it honest &mdash; "I don't understand X yet" is more valuable than pretending. Push your notes to GitHub regularly so employers can see consistent effort over time.</p>
+    </div>
+  </div>
+
+  <!-- ════ RESOURCES ════ -->
+  <div id="resources" class="section">
+    <div class="section-header">
+      <h2>Resources</h2>
+      <p>Every resource is free &middot; No credit card required</p>
+    </div>
+
+    <div class="resource-group"><h3>AI Fundamentals</h3>
+      <div class="resource-item"><a href="https://www.deeplearning.ai/courses/generative-ai-for-everyone/" target="_blank">DeepLearning.AI &ndash; Generative AI for Everyone</a><span class="desc">~5hr &middot; Andrew Ng</span></div>
+      <div class="resource-item"><a href="https://www.cloudskillsboost.google/course_templates/536" target="_blank">Google &ndash; Intro to Generative AI</a><span class="desc">45 min</span></div>
+      <div class="resource-item"><a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/" target="_blank">AWS &ndash; What is RAG?</a><span class="desc">15 min read</span></div>
+      <div class="resource-item"><a href="https://www.anthropic.com/research/building-effective-agents" target="_blank">Anthropic &ndash; Building Effective Agents</a><span class="desc">30 min read</span></div>
+      <div class="resource-item"><a href="https://www.deeplearning.ai/the-batch/how-agents-can-improve-llm-performance/" target="_blank">Andrew Ng &ndash; AI Agentic Design Patterns</a><span class="desc">15 min read</span></div>
+    </div>
+
+    <div class="resource-group"><h3>Prompt Engineering</h3>
+      <div class="resource-item"><a href="https://learnprompting.org/" target="_blank">Learn Prompting</a><span class="desc">Free interactive course</span></div>
+      <div class="resource-item"><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank">Anthropic &ndash; Prompt Engineering Docs</a><span class="desc">Official guide</span></div>
+      <div class="resource-item"><a href="https://docs.anthropic.com/en/prompt-library/library" target="_blank">Anthropic &ndash; Prompt Library</a><span class="desc">Real examples</span></div>
+      <div class="resource-item"><a href="https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/" target="_blank">DeepLearning.AI &ndash; Prompt Eng. for Developers</a><span class="desc">~1.5hr free</span></div>
+    </div>
+
+    <div class="resource-group"><h3>Atlassian AI Ecosystem</h3>
+      <div class="resource-item"><a href="https://support.atlassian.com/rovo/" target="_blank">Rovo &ndash; Complete Documentation</a><span class="desc">Your home base</span></div>
+      <div class="resource-item"><a href="https://support.atlassian.com/rovo/docs/create-and-edit-agents/" target="_blank">Create and Edit Rovo Agents</a><span class="desc">Agent building</span></div>
+      <div class="resource-item"><a href="https://support.atlassian.com/rovo/docs/atlassian-agents/" target="_blank">Out-of-the-box Rovo Agents</a><span class="desc">Pre-built agents</span></div>
+      <div class="resource-item"><a href="https://support.atlassian.com/organization-administration/docs/understand-atlassian-intelligence-features-in-products/" target="_blank">Atlassian Intelligence Features</a><span class="desc">All products</span></div>
+      <div class="resource-item"><a href="https://www.atlassian.com/trust/atlassian-intelligence" target="_blank">Atlassian AI Trust Center</a><span class="desc">Privacy &amp; security</span></div>
+      <div class="resource-item"><a href="https://www.atlassian.com/software/rovo/use-cases" target="_blank">Rovo Use Cases Library</a><span class="desc">Official prompts</span></div>
+      <div class="resource-item"><a href="https://www.atlassian.com/blog/artificial-intelligence/awr-rovo-use-cases" target="_blank">Williams Racing + Rovo</a><span class="desc">Case study</span></div>
+    </div>
+
+    <div class="resource-group"><h3>Agentic Coding (Pilot Context)</h3>
+      <div class="resource-item"><a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank">Claude Code Documentation</a><span class="desc">What the pilot uses</span></div>
+      <div class="resource-item"><a href="https://docs.anthropic.com/en/docs/claude-code/best-practices" target="_blank">Claude Code Best Practices</a><span class="desc">Skills &amp; context files</span></div>
+      <div class="resource-item"><a href="https://aws.amazon.com/bedrock/" target="_blank">Amazon Bedrock</a><span class="desc">Infrastructure</span></div>
+      <div class="resource-item"><a href="https://github.com/features/copilot" target="_blank">GitHub Copilot</a><span class="desc">Competitor</span></div>
+    </div>
+
+    <div class="resource-group"><h3>Industry Context</h3>
+      <div class="resource-item"><a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai" target="_blank">McKinsey &ndash; State of AI</a><span class="desc">Annual survey</span></div>
+      <div class="resource-item"><a href="https://community.atlassian.com/forums/Rovo/" target="_blank">Atlassian Community &ndash; Rovo</a><span class="desc">Discussions</span></div>
+    </div>
+  </div>
+
+  <!-- ════ ABOUT ════ -->
+  <div id="about" class="section">
+    <div class="section-header"><h2>About</h2></div>
+    <div class="card"><h3>Who I Am</h3><p>[Write 2-3 sentences. Example: "I'm an Atlassian platform specialist with X years of experience administering Jira, Confluence, and JSM for enterprise teams. I'm building expertise in AI and automation to help organizations work smarter with the tools they already have."]</p></div>
+    <div class="card"><h3>What I'm Building Toward</h3><p>[Example: "Leading AI adoption and automation across enterprise platforms — bridging the gap between engineering AI tools and organizational adoption. I combine deep platform knowledge with practical AI literacy to build solutions that create measurable business impact."]</p></div>
+    <div class="card"><h3>Skills</h3>
+      <p><strong>Platform:</strong> Jira, Confluence, JSM, Rovo, Atlassian Guard, Jira Product Discovery</p>
+      <p><strong>AI &amp; Automation:</strong> Prompt Engineering, Rovo Agent Design, Jira/Confluence Automation, AI Governance, RAG (conceptual), LLM Application Design</p>
+      <p><strong>Business:</strong> Process Optimization, Stakeholder Communication, Change Management, Technical Documentation</p>
+    </div>
+    <div class="card"><h3>Certifications &amp; Learning</h3>
+      <p>[Add as you complete them]</p>
+      <p>&bull; DeepLearning.AI &ndash; Generative AI for Everyone (March 2026)</p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">Built with curiosity &middot; Updated March 2026 &middot; <a href="https://github.com/yourprofile">Source on GitHub</a></footer>
+
+<script>
+document.querySelectorAll('.nav a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelectorAll('.nav a').forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(link.dataset.section).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+const state = {};
+function initCheckboxes() {
+  document.querySelectorAll('.checklist').forEach(list => {
+    const week = list.dataset.week;
+    if (!state[week]) state[week] = {};
+    list.querySelectorAll('input[type="checkbox"]').forEach((cb, i) => {
+      cb.addEventListener('change', () => {
+        cb.closest('li').classList.toggle('done', cb.checked);
+        updateProgress();
+      });
+    });
+  });
+}
+function updateProgress() {
+  document.querySelectorAll('.checklist').forEach((list, idx) => {
+    const total = list.querySelectorAll('input[type="checkbox"]').length;
+    const checked = list.querySelectorAll('input[type="checkbox"]:checked').length;
+    const pct = total ? Math.round((checked / total) * 100) : 0;
+    const cards = document.querySelectorAll('.progress-card');
+    if (cards[idx]) {
+      cards[idx].querySelector('.progress-bar-fill').style.width = pct + '%';
+      cards[idx].querySelector('.progress-pct').textContent = checked + ' / ' + total + ' tasks';
+    }
+  });
+}
+initCheckboxes();
+updateProgress();
+</script>
+</body>
+</html>
